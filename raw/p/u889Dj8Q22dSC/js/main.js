@@ -28,7 +28,7 @@ gOfObj= []
 
 const objLoader = new OBJLoader()
 objLoader.load(
-'/LamaMadora/raw/p/i8eE2s38vBNE5/resources/caballo.obj',
+'/truck/raw/p/u889Dj8Q22dSC/resources/caballo.obj',
 (object) => {
 gOfObj[gOfObj.length]= object
 gOfObj[gOfObj.length - 1].scale.x= 0.0237156784
@@ -103,13 +103,13 @@ console.log(error)
         );
     }; 
 
-    loadSVG( '/LamaMadora/raw/p/u889Dj8Q22dSC/resources/Calles/Terreno.svg', 0, new THREE.MeshStandardMaterial({ color: 0xd2e2c1, roughness: 1, reflectivity: 0.47 }) );
-    loadSVG( '/LamaMadora/raw/p/u889Dj8Q22dSC/resources/Calles/City_2.svg', 1.21352318, new THREE.MeshStandardMaterial({ color: 0xcfe56f, roughness: 1, reflectivity: 0.27 }) );
-    loadSVG( '/LamaMadora/raw/p/u889Dj8Q22dSC/resources/Calles/City_2-grass1.svg', 0.07822712, new THREE.MeshStandardMaterial({ color: 0x72ff5c, roughness: 1, reflectivity: 0.27 }) ); 
-    loadSVG( '/LamaMadora/raw/p/u889Dj8Q22dSC/resources/Calles/City_2-grass2.svg', 0.07822712, new THREE.MeshStandardMaterial({ color: 0x72ff5c, roughness: 1, reflectivity: 0.27 }) ); 
-    loadSVG( '/LamaMadora/raw/p/u889Dj8Q22dSC/resources/Calles/City_2-grass3.svg', 0.07822712, new THREE.MeshStandardMaterial({ color: 0x72ff5c, roughness: 1, reflectivity: 0.27 }) ); 
-    loadSVG( '/LamaMadora/raw/p/u889Dj8Q22dSC/resources/Calles/City_2-grass4.svg', 0.07822712, new THREE.MeshStandardMaterial({ color: 0x72ff5c, roughness: 1, reflectivity: 0.27 }) ); 
-    loadSVG( '/LamaMadora/raw/p/u889Dj8Q22dSC/resources/Calles/City_2-grass5.svg', 0.07822712, new THREE.MeshStandardMaterial({ color: 0x72ff5c, roughness: 1, reflectivity: 0.27 }) ); 
+    loadSVG( '/truck/raw/p/u889Dj8Q22dSC/resources/Calles/Terreno.svg', 0, new THREE.MeshStandardMaterial({ color: 0xd2e2c1, roughness: 1, reflectivity: 0.47 }) );
+    loadSVG( '/truck/raw/p/u889Dj8Q22dSC/resources/Calles/City_2.svg', 1.21352318, new THREE.MeshStandardMaterial({ color: 0xcfe56f, roughness: 1, reflectivity: 0.27 }) );
+    loadSVG( '/truck/raw/p/u889Dj8Q22dSC/resources/Calles/City_2-grass1.svg', 0.07822712, new THREE.MeshStandardMaterial({ color: 0x72ff5c, roughness: 1, reflectivity: 0.27 }) ); 
+    loadSVG( '/truck/raw/p/u889Dj8Q22dSC/resources/Calles/City_2-grass2.svg', 0.07822712, new THREE.MeshStandardMaterial({ color: 0x72ff5c, roughness: 1, reflectivity: 0.27 }) ); 
+    loadSVG( '/truck/raw/p/u889Dj8Q22dSC/resources/Calles/City_2-grass3.svg', 0.07822712, new THREE.MeshStandardMaterial({ color: 0x72ff5c, roughness: 1, reflectivity: 0.27 }) ); 
+    loadSVG( '/truck/raw/p/u889Dj8Q22dSC/resources/Calles/City_2-grass4.svg', 0.07822712, new THREE.MeshStandardMaterial({ color: 0x72ff5c, roughness: 1, reflectivity: 0.27 }) ); 
+    loadSVG( '/truck/raw/p/u889Dj8Q22dSC/resources/Calles/City_2-grass5.svg', 0.07822712, new THREE.MeshStandardMaterial({ color: 0x72ff5c, roughness: 1, reflectivity: 0.27 }) ); 
     camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.001, 89 );
     camera.position.z= 0.888; 
     camera.position.x = -0.01; 
