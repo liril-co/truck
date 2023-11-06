@@ -67,9 +67,9 @@ document.body.appendChild( renderer.domElement );
 const v3 = new THREE.Vector3( 0, 0, 0 ); 
 
 var curve = new THREE.QuadraticBezierCurve(
-	new THREE.Vector2( Vv11w2.getWorldPosition(v3).x, Vv11w2.getWorldPosition(v3).y ),
-	new THREE.Vector2( 0.20, 0.15 ),
-	new THREE.Vector2( 0.10, 0 )
+    new THREE.Vector2( Vv11w2.getWorldPosition(v3).x, Vv11w2.getWorldPosition(v3).y ),
+    new THREE.Vector2( 0.20, 0.15 ),
+    new THREE.Vector2( 0.10, 0 )
 );
 
 var points = curve.getPoints( 50 );
@@ -96,92 +96,104 @@ var un_grado_en_radianes= Math.PI / 180;
 
 var speed= 0.002; 
 
+var ángulo; 
+
+var getInCuadrant= function(ángulo){ 
+    ángulo= ángulo; 
+    while(ángulo < -360)ángulo+=360; 
+    while(ángulo > 360)ángulo-=360; 
+    if(ángulo < 0)ángulo=(360+ángulo); 
+    return ángulo; 
+} 
+
 //var c = new THREE.Quaternion();  
 
 const a = new THREE.Vector3( 0, 1, 0 ); 
 
 document.addEventListener("keydown", function(i){ 
-	//console.log(i.keyCode);  
+    //console.log(i.keyCode);  
 
-	switch(i.keyCode){ 
-		case izquierda: 
-			//Vv11.position.x-= speed; 
-			//console.log(Vv11w3.rotation.y);  
+    switch(i.keyCode){ 
+        case izquierda: 
+            //Vv11.position.x-= speed; 
+            //console.log(Vv11w3.rotation.y);  
 
-			if(Vv11w3.rotation.y < Math.PI / 4 * 3)
-			{
-				Vv11w3.rotation.y+= 0.023; 
-				Vv11w4.rotation.y+= 0.023;  
-			}
+            if(Vv11w3.rotation.y < Math.PI / 4 * 3)
+            {
+                Vv11w3.rotation.y+= 0.023; 
+                Vv11w4.rotation.y+= 0.023;  
+            }
 
-			renderer.render( scene, camera ); 
-			break; 
-		case derecha: 
-			//Vv11.position.x+= speed; 
-			//console.log(Vv11w3.rotation.y);   
-			if(Vv11w3.rotation.y > Math.PI / 4)
-			{
-				Vv11w3.rotation.y-= 0.023; 
-				Vv11w4.rotation.y-= 0.023; 
-			}
-			break; 
-		case arriba: 
-			Vv11.position.y+= parseFloat($("debuggers .tan span").text()) <= 1? parseFloat($("debuggers .tan span").text()) * speed: (1 - -(1 - parseFloat($("debuggers .tan span").text()))) * speed; 
-			Vv11.position.x+= parseFloat($("debuggers .tan span").text()) <= 1? (1 - parseFloat($("debuggers .tan span").text())) * speed: -(1 - parseFloat($("debuggers .tan span").text())) * -speed;
-			break; 
-		case abajo: 
-			Vv11.position.y-= parseFloat($("debuggers .tan span").text()) <= 1? parseFloat($("debuggers .tan span").text()) * speed: (1 - -(1 - parseFloat($("debuggers .tan span").text()))) * speed; 
-			Vv11.position.x-= parseFloat($("debuggers .tan span").text()) <= 1? (1 - parseFloat($("debuggers .tan span").text())) * speed: -(1 - parseFloat($("debuggers .tan span").text())) * -speed; 
-			break; 
-		case 16: 
-			Vv11.rotation.z-= 0.023; 
-			break; 
-		case 17: 
-			Vv11.rotation.z+= 0.023; 
-			break; 
-	}; 
-	
-	renderer.render( scene, camera ); 
-       
-	$("debuggers .wheel .rotate").css({"rotate": -(Vv11w4.rotation.y / un_grado_en_radianes - 90) + "deg"}); 
-	$("debuggers .Vv11 .rotate").css({"rotate": -(Vv11.rotation.z / un_grado_en_radianes + 180) + "deg"}); 
-	$("debuggers .wheelRelativoAlMundo .rotate").css({"rotate": (-(Vv11.rotation.z / un_grado_en_radianes + 180) - (Vv11w4.rotation.y / un_grado_en_radianes - 90)) + "deg"}); 
-	$("debuggers .bugger span").text((-(Vv11.rotation.z / un_grado_en_radianes + 180) - (Vv11w4.rotation.y / un_grado_en_radianes - 90) + 90)); 
-	$("debuggers .bugger span").attr("title", (-(Vv11.rotation.z / un_grado_en_radianes + 180) - (Vv11w4.rotation.y / un_grado_en_radianes - 90) + 90)); 
-	while(parseFloat($("debuggers .bugger span").text()) < -360){ 
-		$("debuggers .bugger span").text(parseFloat($("debuggers .bugger span").text()) + 360); 
-	}; 
-	while(parseFloat($("debuggers .bugger span").text()) > 360){ 
-		$("debuggers .bugger span").text(parseFloat($("debuggers .bugger span").text()) - 360); 
-	}; 
-	$("debuggers .tan span").text(parseFloat($("debuggers .bugger span").text()) * -(0.5 / 45)); 
-	$("debuggers .tan span").attr("title", parseFloat($("debuggers .bugger span").text()) * -(0.5 / 45)); 
-	(parseFloat($("debuggers .tan span").text()) >= 2 || parseFloat($("debuggers .tan span").text()) < 0)? $("debuggers .tan span").css({"background": "#d67274"}): $("debuggers .tan span").css({"background": "#25cc54"}); 
+            renderer.render( scene, camera ); 
+            break; 
+        case derecha: 
+            //Vv11.position.x+= speed; 
+            //console.log(Vv11w3.rotation.y);   
+            if(Vv11w3.rotation.y > Math.PI / 4)
+            {
+                Vv11w3.rotation.y-= 0.023; 
+                Vv11w4.rotation.y-= 0.023; 
+            }
+            break; 
+        case arriba: 
+            Vv11.position.y+= parseFloat($("debuggers .tan span").text()) <= 1? parseFloat($("debuggers .tan span").text()) * speed: (1 - -(1 - parseFloat($("debuggers .tan span").text()))) * speed; 
+            Vv11.position.x+= parseFloat($("debuggers .tan span").text()) <= 1? (1 - parseFloat($("debuggers .tan span").text())) * speed: -(1 - parseFloat($("debuggers .tan span").text())) * -speed;
+            break; 
+        case abajo: 
+            Vv11.position.y-= parseFloat($("debuggers .tan span").text()) <= 1? parseFloat($("debuggers .tan span").text()) * speed: (1 - -(1 - parseFloat($("debuggers .tan span").text()))) * speed; 
+            Vv11.position.x-= parseFloat($("debuggers .tan span").text()) <= 1? (1 - parseFloat($("debuggers .tan span").text())) * speed: -(1 - parseFloat($("debuggers .tan span").text())) * -speed; 
+            break; 
+        case 16: 
+            Vv11.rotation.z-= 0.023; 
+            break; 
+        case 17: 
+            Vv11.rotation.z+= 0.023; 
+            break; 
+    }; 
+    
+    renderer.render( scene, camera ); 
+    
+    
+    // console.log(getInCuadrant(-Vv11w4.rotation.y / un_grado_en_radianes));  
+    $("debuggers .bugger span").text(getInCuadrant(getInCuadrant(-Vv11.rotation.z / un_grado_en_radianes + 270) + (getInCuadrant(-Vv11w4.rotation.y / un_grado_en_radianes) - 270))); 
+    $("debuggers .bugger span").attr("title", getInCuadrant(getInCuadrant(-Vv11.rotation.z / un_grado_en_radianes + 270) + (getInCuadrant(-Vv11w4.rotation.y / un_grado_en_radianes) - 270))); 
+    $("debuggers .wheel .rotate").css({"rotate": -(Vv11w4.rotation.y / un_grado_en_radianes - 90) + "deg"}); 
+    $("debuggers .Vv11 .rotate").css({"rotate": -(Vv11.rotation.z / un_grado_en_radianes + 180) + "deg"}); 
+    $("debuggers .wheelRelativoAlMundo .rotate").css({"rotate": (-(Vv11.rotation.z / un_grado_en_radianes + 180) - (Vv11w4.rotation.y / un_grado_en_radianes - 90)) + "deg"}); 
+    while(parseFloat($("debuggers .bugger span").text()) < -360){ 
+        $("debuggers .bugger span").text(parseFloat($("debuggers .bugger span").text()) + 360); 
+    }; 
+    while(parseFloat($("debuggers .bugger span").text()) > 360){ 
+        $("debuggers .bugger span").text(parseFloat($("debuggers .bugger span").text()) - 360); 
+    }; 
+    $("debuggers .tan span").text(parseFloat($("debuggers .bugger span").text()) * -(0.5 / 45)); 
+    $("debuggers .tan span").attr("title", parseFloat($("debuggers .bugger span").text()) * -(0.5 / 45)); 
+    (parseFloat($("debuggers .tan span").text()) >= 2 || parseFloat($("debuggers .tan span").text()) < 0)? $("debuggers .tan span").css({"background": "#d67274"}): $("debuggers .tan span").css({"background": "#25cc54"}); 
 
-	scene.remove( curveObject ); 
+    scene.remove( curveObject ); 
 
-	renderer.render( scene, camera ); 
+    renderer.render( scene, camera ); 
 
-	var yProjection= parseFloat($("debuggers .tan span").text()) <= 1? parseFloat($("debuggers .tan span").text()) * 0.22: (1 - -(1 - parseFloat($("debuggers .tan span").text()))) * 0.22; 
-	var xProjection= parseFloat($("debuggers .tan span").text()) <= 1? (1 - parseFloat($("debuggers .tan span").text())) * 0.22: -(1 - parseFloat($("debuggers .tan span").text())) * -0.22; 
+    var yProjection= parseFloat($("debuggers .tan span").text()) <= 1? parseFloat($("debuggers .tan span").text()) * 0.22: (1 - -(1 - parseFloat($("debuggers .tan span").text()))) * 0.22; 
+    var xProjection= parseFloat($("debuggers .tan span").text()) <= 1? (1 - parseFloat($("debuggers .tan span").text())) * 0.22: -(1 - parseFloat($("debuggers .tan span").text())) * -0.22; 
 
-	var curve = new THREE.QuadraticBezierCurve(
-		new THREE.Vector2( Vv11w2.getWorldPosition(v3).x, Vv11w2.getWorldPosition(v3).y ),
-		new THREE.Vector2( Vv11w4.getWorldPosition(v3).x, Vv11w4.getWorldPosition(v3).y ),
-		new THREE.Vector2((Vv11w4.getWorldPosition(v3).x + xProjection), (Vv11w4.getWorldPosition(v3).y + yProjection) )
-	);
-	
-	var points = curve.getPoints( 50 );
-	var x = new THREE.BufferGeometry().setFromPoints( points );
-	
-	const zz = new THREE.LineBasicMaterial( { color: 0xff0000 } );
-	
-	curveObject = new THREE.Line( x, zz );
-	curveObject.name = 'qB';
+    var curve = new THREE.QuadraticBezierCurve(
+        new THREE.Vector2( Vv11w2.getWorldPosition(v3).x, Vv11w2.getWorldPosition(v3).y ),
+        new THREE.Vector2( Vv11w4.getWorldPosition(v3).x, Vv11w4.getWorldPosition(v3).y ),
+        new THREE.Vector2((Vv11w4.getWorldPosition(v3).x + xProjection), (Vv11w4.getWorldPosition(v3).y + yProjection) )
+    );
+    
+    var points = curve.getPoints( 50 );
+    var x = new THREE.BufferGeometry().setFromPoints( points );
+    
+    const zz = new THREE.LineBasicMaterial( { color: 0xff0000 } );
+    
+    curveObject = new THREE.Line( x, zz );
+    curveObject.name = 'qB';
 
-	//console.log(curveObject);  
-	
-	scene.add( curveObject ); 
-	
-	renderer.render( scene, camera ); 
+    //console.log(curveObject);  
+    
+    scene.add( curveObject ); 
+    
+    renderer.render( scene, camera ); 
 }); 
